@@ -1,10 +1,22 @@
 import { createRouter, createWebHistory } from "vue-router";
-import SurveyForm from "../views/Survey.vue";
-import SurveyResults from "../views/Results.vue";
+import Survey from "../views/Survey.vue";
+import Results from "../views/Results.vue";
 
 const routes = [
-  { path: "/", name: "SurveyForm", component: SurveyForm },
-  { path: "/results", name: "SurveyResults", component: SurveyResults },
+  {
+    path: "/",
+    redirect: "/survey",
+  },
+  {
+    path: "/survey",
+    name: "Survey",
+    component: Survey,
+  },
+  {
+    path: "/results",
+    name: "Results",
+    component: Results,
+  },
 ];
 
 const router = createRouter({
