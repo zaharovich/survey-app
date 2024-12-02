@@ -1,5 +1,5 @@
 const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
-  publicPath: "/",
+  publicPath: "/survey-app.github.io/",
   transpileDependencies: true,
 });
