@@ -3,7 +3,6 @@
     <el-card>
       <h1>Результати</h1>
 
-      <!-- Статистика -->
       <div class="statistics">
         <el-row>
           <el-col :span="8">
@@ -27,7 +26,6 @@
         </el-row>
       </div>
 
-      <!-- Фільтрація -->
       <el-form :inline="true" class="filter-form">
         <el-form-item label="Фільтр за ID">
           <el-input
@@ -37,14 +35,12 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <!-- Кнопка очистки -->
           <el-button type="danger" @click="clearResults"
             >Очистити результати</el-button
           >
         </el-form-item>
       </el-form>
 
-      <!-- Таблиця з результатами -->
       <el-table :data="filteredResults" style="width: 100%">
         <el-table-column prop="id" label="ID" width="180"></el-table-column>
         <el-table-column prop="name" label="Ім'я" width="150"></el-table-column>
@@ -68,12 +64,11 @@ export default {
   name: "SurveyResults",
   data() {
     return {
-      results: [], // Усі результати з localStorage
-      filterId: "", // Фільтр ID
+      results: [],
+      filterId: "",
     };
   },
   computed: {
-    // Відфільтровані результати
     filteredResults() {
       if (!this.filterId) {
         return this.results;
@@ -82,14 +77,14 @@ export default {
         result.id.toLowerCase().includes(this.filterId.toLowerCase())
       );
     },
-    // Обчислення середнього віку
+
     averageAge() {
       const ages = this.results.map((result) => result.age).filter(Boolean);
       return ages.length
         ? (ages.reduce((a, b) => a + b, 0) / ages.length).toFixed(1)
         : 0;
     },
-    // Обчислення середньої оцінки
+
     averageRating() {
       const ratings = this.results
         .map((result) => result.rating)
@@ -98,7 +93,7 @@ export default {
         ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1)
         : 0;
     },
-    // Обчислення середньої ймовірності рекомендації
+
     averageRecommendation() {
       const recommendations = this.results
         .map((result) => result.recommendation)
@@ -112,25 +107,20 @@ export default {
   },
   methods: {
     clearResults() {
-      // Очищаем localStorage
       localStorage.removeItem("results");
 
-      // Очищаем массив результатов
       this.results = [];
 
-      // Очищаем фильтр
       this.filterId = "";
 
-      // Показываем уведомление
       this.$message({
         message: "Усі результати успішно очищено!",
         type: "success",
-        showClose: true, // Добавляем крестик для закрытия
+        showClose: true,
       });
     },
   },
   created() {
-    // Завантажуємо дані з localStorage при створенні компонента
     const storedResults = JSON.parse(localStorage.getItem("results") || "[]");
     this.results = storedResults;
   },

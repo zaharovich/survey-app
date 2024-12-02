@@ -19,7 +19,6 @@
         </el-form-item>
 
         <el-form-item label="Оцінка товару від 1 до 5">
-          <!-- Исправленный компонент ElRate -->
           <el-rate
             v-model="formData.rating"
             :max="5"
